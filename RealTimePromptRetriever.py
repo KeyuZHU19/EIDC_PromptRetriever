@@ -31,7 +31,6 @@ class PromptRetriever:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         print(f"Using device: {self.device}")
         
-        # 加载CLIP模型
         print("Loading CLIP model...")
         self.model, self.preprocess = clip.load('ViT-B/32', self.device)
         
@@ -43,7 +42,7 @@ class PromptRetriever:
         self.demo_examples = self._load_demo_database(demo_database_path)
         print(f"Loaded {len(self.demo_examples)} examples from demo database")
         
-        # 预计算demo示例的特征
+        # 预计算demo特征
         self._precompute_demo_features()
     
     def _load_demo_database(self, database_path):
@@ -56,12 +55,11 @@ class PromptRetriever:
                 with open(os.path.join(database_path, filename), 'r') as f:
                     example_data = json.load(f)
                     
-                    # 假设每个示例包含text, video_path和response字段
+                    # 假设每个示例包含text, video_path字段
                     text = example_data['text']
                     video_path = os.path.join(database_path, example_data['video_path'])
-                    response = example_data['response']
                     
-                    examples.append((text, video_path, response))
+                    examples.append((text, video_path))
         
         return examples
     
@@ -80,7 +78,6 @@ class PromptRetriever:
             video_feature = self.encode_video(video_path)
             self.demo_video_features.append(video_feature)
         
-        # 将特征转换为张量以便于批处理计算
         self.demo_text_features = torch.cat(self.demo_text_features, dim=0)
         self.demo_video_features = torch.cat(self.demo_video_features, dim=0)
         print("Precomputation completed")

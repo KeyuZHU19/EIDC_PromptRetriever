@@ -6,7 +6,7 @@ import os
 retriever = PromptRetriever(
     demo_database_path="/path/to/demo_database",
     text_weight=0.6,
-    top_k=3,
+    top_k=1,
     video_frame_rate=2,
     aggregation_method='attention'
 )
