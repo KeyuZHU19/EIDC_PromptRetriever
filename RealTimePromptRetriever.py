@@ -69,7 +69,7 @@ class PromptRetriever:
         self.demo_text_features = []
         self.demo_video_features = []
         
-        for text, video_path, _ in self.demo_examples:
+        for text, video_path in self.demo_examples:
             # 编码文本
             text_feature = self.encode_text(text)
             self.demo_text_features.append(text_feature)
