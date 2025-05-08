@@ -4,7 +4,7 @@ import os
 
 # 初始化检索器
 retriever = PromptRetriever(
-    demo_database_path="/path/to/demo_database",
+    demo_database_path="D:\Desktop\Demo_json",
     text_weight=0.6,
     top_k=1,
     video_frame_rate=2,
@@ -12,8 +12,8 @@ retriever = PromptRetriever(
 )
 
 # 单个查询示例
-image_path = "input_image.jpg"
-with open('instruction.txt', 'r') as f:
+image_path = "D:\Desktop\test_case.png"
+with open('D:\Desktop\ins.txt', 'r') as f:
     text_instruction = f.read().strip()
 
 # 检索相关示例
